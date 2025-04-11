@@ -9,12 +9,12 @@ async function listModels() {
     try {
         const response = await axios.get(url);
         const models = response.data.models;
-        console.log("✅ Available Models:");
+        console.log("Available Models:");
         models.forEach((model) => {
             console.log(`- ${model.name} (${model.supportedGenerationMethods?.join(', ')})`);
         });
     } catch (error) {
-        console.error("❌ Error fetching models:", error.response?.data || error.message);
+        console.error("Error fetching models:", error.response?.data || error.message);
     }
 }
 

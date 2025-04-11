@@ -18,4 +18,18 @@ This project provides a simple web-based interface to generate summaries of arti
    - Ensure you have a modern web browser installed.
 
 3. **Configure the Application**:
-   - Replace `'your_gemini_api_key'` in both the JavaScript file and the HTML file with your actual Gemini API key.
+   - Replace `'your_gemini_api_key'` in the .env with your actual Gemini API key.
+
+## To run
+
+1. Clone the repo as a zip.
+
+2. Open Vscode and open the project folder.
+
+3. Type 'node server.js'.
+
+4. Go to localhost:3000.
+
+5. Copy your desired article and paste it on the textbox.
+
+6. Hit summarize and wait for it to process, congratulations, you now have a summarized article.
