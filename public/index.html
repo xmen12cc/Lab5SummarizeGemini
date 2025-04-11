@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Article Summarizer</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(to right, #1e3c72, #2a5298);
+            color: #fff;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+        }
+    
+        h2 {
+            margin-top: 40px;
+            font-size: 2.5rem;
+            text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.4);
+        }
+    
+        textarea {
+            width: 90%;
+            max-width: 800px;
+            height: 180px;
+            padding: 15px;
+            font-size: 1rem;
+            border-radius: 10px;
+            border: none;
+            resize: none;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            margin-top: 20px;
+        }
+    
+        button {
+            margin-top: 20px;
+            padding: 12px 30px;
+            font-size: 1rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 25px;
+            background-color: #00c6ff;
+            background-image: linear-gradient(45deg, #00c6ff, #0072ff);
+            color: #fff;
+            cursor: pointer;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+    
+        button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 12px rgba(0,0,0,0.4);
+        }
+    
+        #summary {
+            margin-top: 30px;
+            padding: 20px;
+            width: 90%;
+            max-width: 800px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.3);
+            white-space: pre-wrap;
+        }
+    </style>    
+</head>
+<body>
+    <h2>Article Summarizer</h2>
+    <textarea id="articleInput" placeholder="Paste your article text here..."></textarea>
+    <button onclick="getSummary()">Summarize</button>
+    <div id="summary"></div>
+
+    <script>
+        async function getSummary() {
+            const articleText = document.getElementById('articleInput').value;
+            try {
+                const response = await fetch('/summarize', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ article: articleText })
+                });
+                const data = await response.json();
+                document.getElementById('summary').innerText = data.summary;
+            } catch (err) {
+                console.error(err);
+                document.getElementById('summary').innerText = 'Failed to get summary.';
+            }
+        }
+    </script>
+</body>
+</html>
